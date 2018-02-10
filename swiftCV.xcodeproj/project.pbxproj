@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6A1D29EA202C84D500B3D161 /* FrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1D29E9202C84D500B3D161 /* FrameExtractor.swift */; };
+		6A4ACEE6202F9D7A006F5D31 /* haarcascade_frontalface_default.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6A4ACEE5202F9D7A006F5D31 /* haarcascade_frontalface_default.xml */; };
 		6AC18D55202BA496007FEF62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC18D54202BA496007FEF62 /* AppDelegate.swift */; };
 		6AC18D57202BA496007FEF62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC18D56202BA496007FEF62 /* ViewController.swift */; };
 		6AC18D5A202BA496007FEF62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AC18D58202BA496007FEF62 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		6A1D29E9202C84D500B3D161 /* FrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameExtractor.swift; sourceTree = "<group>"; };
+		6A4ACEE5202F9D7A006F5D31 /* haarcascade_frontalface_default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = haarcascade_frontalface_default.xml; sourceTree = "<group>"; };
 		6AC18D51202BA496007FEF62 /* swiftCV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftCV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AC18D54202BA496007FEF62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AC18D56202BA496007FEF62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				6AC18D69202BA535007FEF62 /* OpenCVWrapper.h */,
 				6AC18D6A202BA535007FEF62 /* OpenCVWrapper.mm */,
 				6AC18D68202BA534007FEF62 /* swiftCV-Bridging-Header.h */,
+				6A4ACEE5202F9D7A006F5D31 /* haarcascade_frontalface_default.xml */,
 			);
 			path = swiftCV;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				6AC18D5F202BA496007FEF62 /* LaunchScreen.storyboard in Resources */,
 				6AC18D5C202BA496007FEF62 /* Assets.xcassets in Resources */,
+				6A4ACEE6202F9D7A006F5D31 /* haarcascade_frontalface_default.xml in Resources */,
 				6AC18D5A202BA496007FEF62 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

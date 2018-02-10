@@ -13,6 +13,7 @@ protocol FrameExtractorDelegate: class {
 class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     var position = AVCaptureDevice.Position.back
+    //private let quality = AVCaptureSession.Preset.low
     private let quality = AVCaptureSession.Preset.medium
     
     private var permissionGranted = false

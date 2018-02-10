@@ -18,6 +18,12 @@
 
 +(UIImage *) makeThreshold:(UIImage *)image;
 
++(UIImage *) detectFaces: (UIImage *)image;
+
++(UIImage *) detectShapes: (UIImage *)image;
+
++(UIImage *) detectCircles: (UIImage *)image;
+
 @end
 
 

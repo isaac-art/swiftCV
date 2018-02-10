@@ -25,32 +25,27 @@ class ViewController: UIViewController, FrameExtractorDelegate {
         frameExtractor.delegate = self
     }
     
-    @IBAction func swipeDown(_ sender: Any) {
-        if(frontCam){
-            frontCam = false;
-        frameExtractor.captureSession.stopRunning();
-            frameExtractor.position = AVCaptureDevice.Position.back
-            frameExtractor.configureSession()
-            
-            frameExtractor.captureSession.startRunning();
-        }else{
-            frontCam = true;
-        frameExtractor.captureSession.stopRunning();
-            frameExtractor.position = AVCaptureDevice.Position.front
-            frameExtractor.configureSession()
-            frameExtractor.captureSession.startRunning();
-        }
-    }
     
     func captured(image: UIImage) {
         if(counter == 0){
-            imageOutlet.image = OpenCVWrapper.fillShape(image)
+            imageOutlet.image = OpenCVWrapper.detectCircles(image)
         }
         else if(counter == 1){
-            imageOutlet.image = OpenCVWrapper.makeItGrayScale(image)
+            imageOutlet.image = OpenCVWrapper.fillShape(image)
         }
         else if(counter == 2){
+            imageOutlet.image = OpenCVWrapper.makeItGrayScale(image)
+        }
+        else if(counter == 3){
             imageOutlet.image = OpenCVWrapper.makeThreshold(image)
+//            THIS FACE DETECTION IS TOO SLOW - CPU HEAVY -
+//            let res = OpenCVWrapper.detectFaces(image)
+//            if(res != nil){
+//                imageOutlet.image = res
+//            }
+//            else{
+//                imageOutlet.image = image
+//            }
         }
     }
     
@@ -66,6 +61,8 @@ class ViewController: UIViewController, FrameExtractorDelegate {
         }else if(counter == 1){
             counter = 2
         }else if(counter == 2){
+            counter = 3
+        }else if(counter == 3){
             counter = 0
         }
     }
