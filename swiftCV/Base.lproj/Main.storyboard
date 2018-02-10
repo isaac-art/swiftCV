@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="swiftCV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="INH-GO-kXs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aws-Bj-RuC" appends="YES" id="abD-65-zF1"/>
+                                    <outletCollection property="gestureRecognizers" destination="abf-fc-aRJ" appends="YES" id="RVG-yh-dff"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="INH-GO-kXs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="XzX-oC-gVq"/>
+                            <constraint firstItem="INH-GO-kXs" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fe0-Cx-rbL"/>
+                            <constraint firstItem="INH-GO-kXs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="iIj-y8-jU9"/>
+                            <constraint firstItem="INH-GO-kXs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="z86-Ma-cD7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageOutlet" destination="INH-GO-kXs" id="Mij-Qk-vAL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="aws-Bj-RuC">
+                    <connections>
+                        <action selector="tappedScreen:" destination="BYZ-38-t0r" id="uQz-HY-CXY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="abf-fc-aRJ">
+                    <connections>
+                        <action selector="swipeDown:" destination="BYZ-38-t0r" id="bZ8-dd-oYm"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="329" y="21"/>
+        </scene>
+    </scenes>
+</document>
