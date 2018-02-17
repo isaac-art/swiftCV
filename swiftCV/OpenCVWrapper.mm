@@ -291,6 +291,7 @@ using namespace cv;
     {
         cv::approxPolyDP(Mat(contours[i]), shapes[i], 3, true);
         String shape = " ";
+        
         if(shapes[i].size() == 3){
             //triangle
             shape = "triangle";
