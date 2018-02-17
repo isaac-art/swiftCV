@@ -10,6 +10,7 @@ import AVFoundation
 
 class ViewController: UIViewController, FrameExtractorDelegate {
     
+    var num = 0;
     var counter = 0;
     var frontCam = false;
     
@@ -19,6 +20,8 @@ class ViewController: UIViewController, FrameExtractorDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //diable the screen time out
+        UIApplication.shared.isIdleTimerDisabled = true
         // Do any additional setup after loading the view, typically from a nib.
         //OpenCVVersionLabel.text = OpenCVWrapper.openCVVersionString();
         frameExtractor = FrameExtractor()
@@ -27,25 +30,24 @@ class ViewController: UIViewController, FrameExtractorDelegate {
     
     
     func captured(image: UIImage) {
-        if(counter == 0){
-            imageOutlet.image = OpenCVWrapper.detectCircles(image)
-        }
-        else if(counter == 1){
-            imageOutlet.image = OpenCVWrapper.fillShape(image)
-        }
-        else if(counter == 2){
-            imageOutlet.image = OpenCVWrapper.makeItGrayScale(image)
-        }
-        else if(counter == 3){
-            imageOutlet.image = OpenCVWrapper.makeThreshold(image)
-//            THIS FACE DETECTION IS TOO SLOW - CPU HEAVY -
-//            let res = OpenCVWrapper.detectFaces(image)
-//            if(res != nil){
-//                imageOutlet.image = res
-//            }
-//            else{
-//                imageOutlet.image = image
-//            }
+        num += 1
+        if(num%2 == 0){
+            num = 0
+            if(counter == 0){
+                imageOutlet.image = OpenCVWrapper.detectShapesV2(image)
+            }
+            else if(counter == 1){
+                imageOutlet.image = OpenCVWrapper.detectShapesV2(image)
+            }
+            else if(counter == 2){
+                imageOutlet.image = OpenCVWrapper.makeItGrayScale(image)
+            }
+            else if(counter == 3){
+                imageOutlet.image = OpenCVWrapper.makeThreshold(image)
+            }
+            else if(counter == 4){
+                imageOutlet.image = OpenCVWrapper.fillShape(image)
+            }
         }
     }
     
@@ -63,6 +65,8 @@ class ViewController: UIViewController, FrameExtractorDelegate {
         }else if(counter == 2){
             counter = 3
         }else if(counter == 3){
+            counter = 4
+        }else if(counter == 4){
             counter = 0
         }
     }

@@ -24,6 +24,8 @@
 
 +(UIImage *) detectCircles: (UIImage *)image;
 
++(UIImage *) detectShapesV2: (UIImage *)image;
+
 @end
 
 

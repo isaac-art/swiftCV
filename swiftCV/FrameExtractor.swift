@@ -56,12 +56,21 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func configureSession() {
         guard permissionGranted else { return }
         captureSession.sessionPreset = quality
+        
+        
         guard let captureDevice = selectCaptureDevice() else { return }
+      
+//        try? captureDevice.lockForConfiguration()
+//        captureDevice.activeVideoMinFrameDuration = CMTimeMake(1, 4)
+//        captureDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 4)
+//        captureDevice.unlockForConfiguration()
+        
         guard let captureDeviceInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
         guard captureSession.canAddInput(captureDeviceInput) else { return }
         captureSession.addInput(captureDeviceInput)
         let videoOutput = AVCaptureVideoDataOutput()
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "sample buffer"))
+        
         guard captureSession.canAddOutput(videoOutput) else { return }
         captureSession.addOutput(videoOutput)
         guard let connection = videoOutput.connection(with: AVFoundation.AVMediaType.video) else { return }
@@ -69,6 +78,7 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         guard connection.isVideoMirroringSupported else { return }
         connection.videoOrientation = .portrait
         connection.isVideoMirrored = position == .front
+        
     }
     
     private func selectCaptureDevice() -> AVCaptureDevice? {
@@ -92,5 +102,6 @@ class FrameExtractor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         DispatchQueue.main.async { [unowned self] in
             self.delegate?.captured(image: uiImage)
         }
+        
     }
 }

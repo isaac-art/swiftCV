@@ -10,6 +10,7 @@
 #import <opencv2/imgcodecs/ios.h>
 #import <opencv2/imgproc/imgproc.hpp>
 #import "OpenCVWrapper.h"
+#include "opencv2/core/types.hpp"
 #include <cmath>
 #include <iostream>
 using namespace cv;
@@ -255,6 +256,92 @@ using namespace cv;
     return MatToUIImage(inputImage);
 }
 
+
+
+
++(UIImage *) detectShapesV2: (UIImage *)image
+{
+    Mat inputImage;
+    UIImageToMat(image, inputImage);
+    
+    Mat gray;
+    cvtColor(inputImage, gray, CV_BGR2GRAY);
+    
+    Mat smallImage;
+    cv::resize(gray, smallImage, cv::Size(image.size.width,image.size.height), 0.3f, 0.3f, INTER_AREA);
+    
+    Mat blurredImage;
+    cv::GaussianBlur(smallImage, blurredImage, Size_<double>(3.0, 3.0), 0);
+    
+    Mat thresholdImage;
+    cv::Canny(blurredImage, thresholdImage, 50, 190);
+    
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<Vec4i> hierarchy;
+    
+    cv::findContours(thresholdImage, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+    
+    std::vector<std::vector<cv::Point>> shapes(contours.size());
+    Mat col = Mat::zeros( thresholdImage.size(), CV_8UC3 );
+    col.setTo(cv::Scalar(200,200,200));
+    
+    int fontface = cv::FONT_HERSHEY_SIMPLEX;
+    
+    for( int i = 0; i< contours.size(); i++ )
+    {
+        cv::approxPolyDP(Mat(contours[i]), shapes[i], 3, true);
+        String shape = " ";
+        if(shapes[i].size() == 3){
+            //triangle
+            shape = "triangle";
+            drawContours( col, contours, i,  Scalar(0,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }else if (shapes[i].size() == 4){
+            //rect
+            shape = "rect";
+            drawContours( col, contours, i, Scalar(255,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }
+        else if(shapes[i].size() == 5){
+            //pentagon
+            shape = "pentagon";
+            drawContours( col, contours, i, Scalar(70,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }
+        else if(shapes[i].size() == 6){
+            //hexagon
+            shape = "hexagon";
+            drawContours( col, contours, i, Scalar(200,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }
+        else if(shapes[i].size() == 7){
+            //heptagon
+            shape = "heptagon";
+            drawContours( col, contours, i, Scalar(150,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }
+        else if(shapes[i].size() == 8){
+            //octagon
+            shape = "octagon";
+            drawContours( col, contours, i, Scalar(180,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }
+        else if(shapes[i].size() == 9){
+            //nonagon
+            shape = "nonagon";
+            drawContours( col, contours, i, Scalar(110,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }
+        else if(shapes[i].size() == 10){
+            //decagon
+            shape = "decagon";
+            drawContours( col, contours, i, Scalar(40,150,200), -2, 8, hierarchy, 0, cv::Point() );
+        }
+        //else if(shapes[i].size() >= 10){
+        //circle
+        //String shape = "circle?";
+        // cv::putText(col, shape, cv::Point(), fontface, 2, Scalar(255,255,255));
+        //drawContours( col, contours, i,  Scalar(50,50,50), 2, 8, hierarchy, 0, cv::Point() );
+        //}
+        
+        
+        cv::putText(col, shape, shapes[i][1], fontface, 0.4, Scalar(255,255,255));
+    }
+   return MatToUIImage(col);
+}
 
 @end
 
